@@ -6,7 +6,9 @@
  */
 ;(function ($, window, document, undefined) {
     var pluginName = 'fixedTableHeader',
-        defaults = {};
+        defaults = {
+            enableHScroll : false
+        };
 
     function Plugin (element, options) {
         this.element = element;
@@ -18,13 +20,28 @@
     
     Plugin.prototype = {
         init : function () {
-        
+           var $table = $(this.element), $parent = $table.parent(), tableContent = this.element.outerHTML;
+                containerHtml = [
+                    '<div class="fixedTBContainer">',
+                        '<div class="fixedTBHeader">',
+                            '<tableContent>',
+                        '</div>',
+                        '<div class="fixedTBBody">',
+                            '<tableContent>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+            
+            $parent.empty();
+            containerHtml = containerHtml.replace(/<tableContent>/g, tableContent);
+            $parent.html(containerHtml);
+            console.log('done========>>');
         }
     };
     
     $.fn[pluginName] = function (options) {
         return this.each(function () {
-            if (!$.data(this, 'plugin_' + pluginName)) {
+            if (!$.data(this, 'plugin_' + pluginName) && this.nodeName === 'TABLE') {
                 $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
             }
         });

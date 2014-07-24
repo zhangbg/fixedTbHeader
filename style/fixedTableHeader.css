@@ -1,0 +1,31 @@
+.fixedTBContainer {
+    width: 100%;
+	height: 98%;
+	padding-right: 16px;
+    position : relative;
+}
+.fixedTBHeader {
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+}
+.fixedTBHeader table {
+    margin :0;
+}
+.fixedTBHeader table  tbody{
+    display : none;
+}
+
+.fixedTBBody {
+    width : 100%;
+    height : 100%;
+    overflow: auto;
+}
+.fixedTBContainer table{
+    table-layout : fixed;
+}
+.fixedTBContainer td, .fixedTBContainer th{
+    text-align : center;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
