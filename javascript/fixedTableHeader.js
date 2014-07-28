@@ -20,21 +20,31 @@
     
     Plugin.prototype = {
         init : function () {
-           var $table = $(this.element), $parent = $table.parent(), tableContent = this.element.outerHTML;
+           var $table = $(this.element), $parent = $table.parent(), tableContent = this.element.outerHTML, scrollBarWidth = 16,
                 containerHtml = [
                     '<div class="fixedTBContainer">',
                         '<div class="fixedTBHeader">',
-                            '<tableContent>',
+                            tableContent,
                         '</div>',
                         '<div class="fixedTBBody">',
-                            '<tableContent>',
+                            tableContent,
                         '</div>',
                     '</div>'
                 ].join('');
             
             $parent.empty();
-            containerHtml = containerHtml.replace(/<tableContent>/g, tableContent);
+            // containerHtml = containerHtml.replace(/<tableContent>/g, tableContent);
             $parent.html(containerHtml);
+            
+            $fixedTBBody = $('.fixedTBContainer .fixedTBBody', $parent);
+            $fixedTBBody.scroll(function (e) { //horizontal scrollBar event for fixed header
+                $('.fixedTBContainer .fixedTBHeader', $parent)[0].scrollLeft = $(this)[0].scrollLeft;
+            });
+            if ($fixedTBBody[0].scrollHeight > $fixedTBBody.innerHeight()) { //detect exists vertical scrollbar
+                $('.fixedTBContainer .fixedTBHeader', $parent).width(function () {
+                    return $(this).width() - scrollBarWidth; //16
+                });
+            }
             console.log('done========>>');
         }
     };

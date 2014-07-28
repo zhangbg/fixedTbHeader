@@ -4,6 +4,13 @@
 body {
     
 }
+.table th, .table td {
+    padding: 8px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+    /* border-top: 1px solid #dddddd; */
+}
 .mainZone {
     padding : 10px;
     width : 850px;
@@ -16,17 +23,28 @@ body {
 .mainZone table {
     width : 100%;
     border: 1px solid gray;
+    border-spacing: 0px;
 }
 
 .mainZone table td, .mainZone table th{
     text-align : center;
     border-bottom : 1px solid gray;
     border-right : 1px solid gray;
+    padding : 8px;
+}
+.mainZone table th {
+    background : #0e6d83;
+    color: #ffffff;
+    font-size: 11pt;
+    font-family: Microsoft YaHei;
+    font-weight: normal;
 }
 
 .mainZone .demoZone, .mainZone .testZone {
     height : 300px;
     margin : 0 20px 20px;
+    position: relative;
+    overflow: hidden;
 }
 
 .mainZone .demoZone {
@@ -34,10 +52,26 @@ body {
 }
 
 .mainZone .demoZone table tr td:last-child,
-.mainZone .demoZone table tr th:last-child  {
+.mainZone .demoZone table tr th:last-child ,
+.mainZone .testZone table tr td:last-child,
+.mainZone .testZone table tr th:last-child  {
     border-right : none;
 }
+.mainZone .demoZone table thead:first-child tr:first-child th,
+.mainZone .demoZone table tbody tr:first-child td,
+.mainZone .testZone table thead:first-child tr:first-child th,
+.mainZone .testZone table tbody tr:first-child td {
+    border-top: 0;
+}
 
-.mainZone .demoZone table  tbody tr:last-child td {
+.mainZone .demoZone table  tbody tr:last-child td,
+.mainZone .testZone table  tbody tr:last-child td {
     border-bottom : none;
+}
+
+.mainZone .firstTh {
+    width : 10%;
+}
+.mainZone .contentTh {
+    width : 20%;
 }
