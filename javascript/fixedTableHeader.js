@@ -20,7 +20,8 @@
     
     Plugin.prototype = {
         init : function () {
-           var $table = $(this.element), $parent = $table.parent(), tableContent = this.element.outerHTML, scrollBarWidth = 16,
+           var $table = $(this.element), $parent = $table.parent(), tableContent = this.element.outerHTML,
+                scrollBarWidth = this.scrollBarHW ? this.scrollBarHW.width : this.getScrollBarHW().width, //16,
                 containerHtml = [
                     '<div class="fixedTBContainer">',
                         '<div class="fixedTBHeader">',
@@ -46,6 +47,26 @@
                 });
             }
             console.log('done========>>');
+        },
+        getScrollBarHW : function () { //获取浏览器的宽度和高度对象
+            if (this.scrollBarHW) {
+                return this.scrollBarHW;
+            }
+            var div = document.createElement('div');
+            div.style.overflow = 'scroll';
+            div.style.visibility = 'hidden';
+            div.style.position = 'absolute';
+            div.style.width = '100px';
+            div.style.height = '100px';
+            //div.style.cssText = 'overflow:scroll;width:100px;height:100px;';
+            document.body.appendChild(div);
+
+            this.scrollBarHW = {
+                width : div.offsetWidth - div.clientWidth,
+                height : div.offsetHeight - div.clientHeight
+            };
+            div.parentNode.removeChild(div);
+            return this.scrollBarHW;
         }
     };
     
